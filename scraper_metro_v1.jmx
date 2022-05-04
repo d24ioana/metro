@@ -10,7 +10,12 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="company" elementType="Argument">
             <stringProp name="Argument.name">company</stringProp>
-            <stringProp name="Argument.value">metro</stringProp>
+            <stringProp name="Argument.value">METRO</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="remote" elementType="Argument">
+            <stringProp name="Argument.name">remote</stringProp>
+            <stringProp name="Argument.value">remote</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -389,6 +394,7 @@ log.info(title);
 var id = vars.get(&quot;ids_&quot;+k);
 var link =&quot;https://metro.taleo.net/careersection/2/jobdetail.ftl?job=&quot;+id+&quot;&amp;tz=GMT%2B02%3A00&amp;tzname=Europe%2FBucharest&quot;;
 log.info(link);
+var remote = vars.get(&quot;remote&quot;);
 var city = vars.get(&quot;cities_&quot;+k);
 city = city.replaceAll(&apos;Ã¢&apos;,&apos;â&apos;);
 city = city.replaceAll(&apos;Å&#x9f;&apos;,&apos;ș&apos;);
@@ -396,10 +402,16 @@ city = city.replaceAll(&apos;Ã®&apos;,&apos;â&apos;);
 city = city.replaceAll(&apos;Ä&#x83;&apos;,&apos;ă&apos;);
 city = city.replaceAll(&apos;Å£&apos;,&apos;ț&apos;);
 city = city.replaceAll(&apos;România-&apos;,&apos; &apos;);
-//city = city.replaceAll(&apos;România&apos;,&apos;&apos;);
+city = city.replaceAll(&apos;România&apos;,&apos;&apos;);
+
+if(city.contains(&apos;București&apos;)== false){
+	city == &quot;&quot;;
+	}else{
+		remote = &apos;&apos;;}
+		
 log.info(city);
 var company = vars.get(&quot;company&quot;);
-String job=&apos;{&quot;id&quot;: &quot;&apos;+guid+&apos;&quot;,&quot;job_title&quot;: &quot;&apos;+title+&apos;&quot;,&quot;job_link&quot;: &quot;&apos;+link+&apos;&quot;, &quot;company&quot;: &quot;&apos;+company+&apos;&quot;,    &quot;country&quot;: &quot;România&quot;,&quot;city&quot;: &apos;+city+&apos; }&apos;;
+String job=&apos;{&quot;id&quot;: &quot;&apos;+guid+&apos;&quot;, &quot;remote&quot;: &quot;&apos;+remote+&apos;&quot;, &quot;job_title&quot;: &quot;&apos;+title+&apos;&quot;,&quot;job_link&quot;: &quot;&apos;+link+&apos;&quot;, &quot;company&quot;: &quot;&apos;+company+&apos;&quot;,    &quot;country&quot;: &quot;România&quot;,&quot;city&quot;: &apos;+city+&apos; }&apos;;
 var joblist = vars.getObject(&quot;joblist&quot;);
 joblist = joblist + job;
 vars.putObject(&quot;joblist&quot;, joblist);
